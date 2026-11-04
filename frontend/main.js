@@ -1,24 +1,63 @@
-const baseUrl ="http://localhost:5167/api/musicrecord";
+import { createApp } from 'vue';
+import axios from 'axios';
+import Add from './src/components/Add.vue';
 
-const app = Vue.createApp({
-    data(){
-        return {
-            musicRecords: [],
-        }
+const baseUrl = 'http://localhost:5167/api/musicrecord';
+
+const app = createApp({
+  components: {
+    Add,
+  },
+  data() {
+    return {
+      musicRecords: [],
+    };
+  },
+  methods: {
+    async getAllAsync() {
+      try {
+        const response = await axios.get(baseUrl);
+        this.musicRecords = response.data;
+      } catch (error) {
+        alert(error.message);
+      }
     },
-    methods: {
-        async GetAllAsync(){
-            try {
-                    const response = await axios.get(baseUrl)
-                    this.musicRecords = await response.data;
-                    console.log(response.data);
-                } catch (ex) {
-                    alert(ex.message);
-                }
-        },
+    async addMusicRecord(record) {
+      try {
+        await axios.post(baseUrl, record);
+        await this.getAllAsync();
+      } catch (error) {
+        alert(error.message);
+      }
     },
-        async created(){
-        console.log("Getting data");
-        await this.GetAllAsync();
-        }
-}).mount('#app')
+  },
+  mounted() {
+    this.getAllAsync();
+  },
+  template: `
+    <div>
+      <h1>DR Musik Samling</h1>
+      <Add @add-music-record="addMusicRecord" />
+      <table id="music_record_table" class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Duration</th>
+            <th>Year</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="musicRecord in musicRecords" :key="musicRecord.id">
+            <td>{{ musicRecord.title }}</td>
+            <td>{{ musicRecord.artist }}</td>
+            <td>{{ musicRecord.duration }}</td>
+            <td>{{ musicRecord.year }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+});
+
+app.mount('#app');
