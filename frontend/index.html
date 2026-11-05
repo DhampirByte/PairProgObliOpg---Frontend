@@ -29,6 +29,26 @@
           </tr>
         </tbody>
       </table>
+      <h2>Add New Music Record</h2>
+      <form @submit.prevent="AddAsync">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" id="title" v-model="addData.title" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="artist" class="form-label">Artist</label>
+          <input type="text" id="artist" v-model="addData.artist" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="duration" class="form-label">Duration</label>
+          <input type="text" id="duration" v-model="addData.duration" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="year" class="form-label">Year</label>
+          <input type="number" id="year" v-model.number="addData.year" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Record</button>
+      </form>
     </div>
     <script type="module" src="main.js"></script>
   </body>
