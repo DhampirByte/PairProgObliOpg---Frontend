@@ -9,7 +9,7 @@ const app = Vue.createApp({
                 artist: '',
                 duration: '',
                 year: ''
-            }
+            },
         }
     },
     methods: {
@@ -31,9 +31,10 @@ const app = Vue.createApp({
                 alert(ex.message);
             }
         },
-        async created(){
-        console.log("Getting data");
-        await this.GetAllAsync();
-        }
+    },
+    onMounted(){
+        console.log("Mounted");
+        this.GetAllAsync();
     }
-}).mount('#app')
+})
+app.mount('#app')

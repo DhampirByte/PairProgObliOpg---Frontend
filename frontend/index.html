@@ -21,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="musicRecord in musicRecords" :key="musicRecord.id">
+          <tr v-for="musicRecord in musicRecords">
             <td>{{ musicRecord.title }}</td>
             <td>{{ musicRecord.artist }}</td>
             <td>{{ musicRecord.duration }}</td>
@@ -32,22 +32,22 @@
       <h2>Add New Music Record</h2>
       <form @submit.prevent="AddAsync">
         <div class="mb-3">
-          <label for="title" class="form-label">Title</label>
-          <input type="text" id="title" v-model="addData.title" class="form-control" required>
+          <label for="add_record_title" class="form-label">Title</label>
+          <input type="text" id="add_record_title" v-model="addData.title" class="form-control" required>
         </div>
         <div class="mb-3">
-          <label for="artist" class="form-label">Artist</label>
-          <input type="text" id="artist" v-model="addData.artist" class="form-control" required>
+          <label for="add_record_artist" class="form-label">Artist</label>
+          <input type="text" id="add_record_artist" v-model="addData.artist" class="form-control" required>
         </div>
         <div class="mb-3">
-          <label for="duration" class="form-label">Duration</label>
-          <input type="text" id="duration" v-model="addData.duration" class="form-control">
+          <label for="add_record_duration" class="form-label">Duration</label>
+          <input type="text" id="add_record_duration" v-model="addData.duration" class="form-control">
         </div>
         <div class="mb-3">
-          <label for="year" class="form-label">Year</label>
-          <input type="number" id="year" v-model.number="addData.year" class="form-control">
+          <label for="add_record_year" class="form-label">Year</label>
+          <input type="number" id="add_record_year" v-model.number="addData.year" class="form-control">
         </div>
-        <button type="submit" class="btn btn-primary">Add Record</button>
+        <button id="add_record_button" type="submit" class="btn btn-primary">Add Record</button>
       </form>
     </div>
     <script type="module" src="main.js"></script>
