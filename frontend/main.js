@@ -1,4 +1,4 @@
-const baseUrl ="http://localhost:5167/api/musicrecord";
+const baseUrl ="https://localhost:7186/api/musicrecord";
 
 const app = Vue.createApp({
     data(){
@@ -31,10 +31,25 @@ const app = Vue.createApp({
                 alert(ex.message);
             }
         },
+        async DeleteAsync(id){
+            try {
+                const response = await axios.delete(`${baseUrl}/${id}`);
+                await this.GetAllAsync();
+                console.log(response.data);
+            } catch (ex) {
+                alert(ex.message);
+            }
+        }
     },
-    onMounted(){
-        console.log("Mounted");
+/*    mounted() {
+        console.log("Mounted method called");
         this.GetAllAsync();
+    },*/
+    async created(){
+        console.log("Getting data");
+        await this.GetAllAsync();
+        this.tempPlayers = this.players;
+        console.log(this.tempPlayers);
     }
 })
 app.mount('#app')
