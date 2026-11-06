@@ -1,4 +1,4 @@
-const baseUrl ="https://localhost:7186/api/musicrecord";
+const baseUrl ="https://musicrecordrestapi-hdh3dzf7d3gqc5g3.westeurope-01.azurewebsites.net/api/musicrecord";
 
 const app = Vue.createApp({
     data(){
