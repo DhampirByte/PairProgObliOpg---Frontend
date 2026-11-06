@@ -27,7 +27,7 @@
             <td>{{ musicRecord.duration }}</td>
             <td>{{ musicRecord.year }}</td>
             <td>
-              <button @click="DeleteAsync(musicRecord.id)" class="btn btn-danger">Delete</button>
+              <button @click="DeleteAsync(musicRecord.id)" :id="'delete_record_button_' + musicRecord.id" class="btn btn-danger">Delete</button>
             </td>
           </tr>
         </tbody>
