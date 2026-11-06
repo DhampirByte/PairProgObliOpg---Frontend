@@ -11,7 +11,7 @@
   <body>
     <div id="app">
       <h1>DR Musik Samling</h1>
-      <table id="music_record_table" class="table">
+      <table id="music_record_table" v-if="musicRecords.length >= 0" class="table">
         <thead>
           <tr>
             <th>Title</th>
@@ -26,11 +26,17 @@
             <td>{{ musicRecord.artist }}</td>
             <td>{{ musicRecord.duration }}</td>
             <td>{{ musicRecord.year }}</td>
+            <td>
+              <button @click="DeleteAsync(musicRecord.id)" :id="'delete_record_button_' + musicRecord.id" class="btn btn-danger">Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>
+      <div v-else>
+        <p>No music records found.</p>
+      </div>
       <h2>Add New Music Record</h2>
-      <form @submit.prevent="AddAsync">
+      <form @submit.prevent="AddAsync" id="add_record_form">
         <div class="mb-3">
           <label for="add_record_title" class="form-label">Title</label>
           <input type="text" id="add_record_title" v-model="addData.title" class="form-control" required>
