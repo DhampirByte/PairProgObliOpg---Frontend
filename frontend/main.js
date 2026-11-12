@@ -1,55 +1,37 @@
-const baseUrl ="https://musicrecordrestapi-hdh3dzf7d3gqc5g3.westeurope-01.azurewebsites.net/api/musicrecord";
+import LoginComponent from "./components/login_component.js";
+import MusicRecordComponent from "./components/musicrecords_component.js";
+import { getStoredUserInfo } from "./app-config.js";
 
-const app = Vue.createApp({
-    data(){
-        return {
-            musicRecords: [],
-            addData: {
-                title: '',
-                artist: '',
-                duration: '',
-                year: ''
-            },
-        }
-    },
-    methods: {
-        async GetAllAsync(){
-            try {
-                    const response = await axios.get(baseUrl)
-                    this.musicRecords = await response.data;
-                    console.log(response.data);
-                } catch (ex) {
-                    alert(ex.message);
-                }
-        },
-        async AddAsync(){
-            try {
-                const response = await axios.post(baseUrl, this.addData);
-                this.musicRecords.push(response.data);
-                console.log(response.data);
-            } catch (ex) {
-                alert(ex.message);
-            }
-        },
-        async DeleteAsync(id){
-            try {
-                const response = await axios.delete(`${baseUrl}/${id}`);
-                await this.GetAllAsync();
-                console.log(response.data);
-            } catch (ex) {
-                alert(ex.message);
-            }
-        }
-    },
-/*    mounted() {
-        console.log("Mounted method called");
-        this.GetAllAsync();
-    },*/
-    async created(){
-        console.log("Getting data");
-        await this.GetAllAsync();
-        this.tempPlayers = this.players;
-        console.log(this.tempPlayers);
+axios.interceptors.request.use(config => {
+    
+        const token = getStoredUserInfo()?.token;
+        console.log("token: ", token);
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        
     }
-})
-app.mount('#app')
+
+    return config;
+});
+
+const router = VueRouter.createRouter({
+    history: VueRouter.createWebHashHistory(),
+    routes: [
+        { path: "/", redirect: () => getStoredUserInfo() ? "/musicrecords" : "/login" },
+        { path: "/login", name: "login", component: LoginComponent },
+        { path: "/musicrecords", name: "musicrecords", component: MusicRecordComponent, meta: { requiresAuth: true } }
+    ]
+});
+
+router.beforeEach(to => {
+    const isAuthenticated = Boolean(getStoredUserInfo());
+
+    if (to.meta.requiresAuth && !isAuthenticated) {
+        return { name: "login" };
+    }
+    if (to.name === "login" && isAuthenticated) {
+        return { name: "musicrecords" };
+    }
+});
+
+Vue.createApp({}).use(router).mount('#app')
