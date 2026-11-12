@@ -6,7 +6,6 @@ export const tokenName = "userInfo";
 
 export function getStoredUserInfo() {
     try {
-        console.log("Retrieving user info from localStorage");
         const userInfo = JSON.parse(localStorage.getItem(tokenName));
         console.log("Retrieved user info from localStorage", userInfo);
         return userInfo && userInfo.token ? userInfo : null;

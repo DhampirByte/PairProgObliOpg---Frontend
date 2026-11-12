@@ -4,7 +4,6 @@ export default {
     template: `
     <header class="topbar">
         <a class="wordmark" href="#/" aria-label="DR Musik Samling">
-            <span class="wordmark-mark" aria-hidden="true">C</span>
             <span>CATALOG</span>
         </a>
         <div class="account-actions">
@@ -59,18 +58,18 @@ export default {
         <button id="add_record_button" type="submit" class="btn btn-primary">Add Record</button>
       </form>
 `,
-data(){
-        return {
-            musicRecords: [],
-            addData: {
-                title: '',
-                artist: '',
-                duration: '',
-                year: '',
-                
-            },
-        }
-    },
+  data(){
+    return {
+      userInfo: getStoredUserInfo(),
+      musicRecords: [],
+      addData: {
+        title: '',
+        artist: '',
+        duration: '',
+        year: '',
+      },
+    }
+  },
     methods: {
         logout() {
             localStorage.removeItem(tokenName);
@@ -108,5 +107,5 @@ data(){
         await this.GetAllAsync();
         
     }
-    }
+  }
 }

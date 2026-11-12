@@ -5,6 +5,7 @@ import { getStoredUserInfo } from "./app-config.js";
 axios.interceptors.request.use(config => {
     
         const token = getStoredUserInfo()?.token;
+        console.log("token: ", token);
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         
