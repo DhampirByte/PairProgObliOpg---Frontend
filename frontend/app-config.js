@@ -1,7 +1,6 @@
-//export const authUrl = "https://musicrecordrestapi-hdh3dzf7d3gqc5g3.westeurope-01.azurewebsites.net/api/auth
-//export const musicRecordsUrl = "https://musicrecordrestapi-hdh3dzf7d3gqc5g3.westeurope-01.azurewebsites.net/api/musicrecord";
-export const authUrl = "https://localhost:7186/api/Auth/login";
-export const musicRecordsUrl = "https://localhost:7186/api/MusicRecord";
+export const authUrl = "https://musicrecordrestapi-hdh3dzf7d3gqc5g3.westeurope-01.azurewebsites.net/api/auth/login";
+export const musicRecordsUrl = "https://musicrecordrestapi-hdh3dzf7d3gqc5g3.westeurope-01.azurewebsites.net/api/musicrecord";
+
 export const tokenName = "userInfo";
 
 export function getStoredUserInfo() {
