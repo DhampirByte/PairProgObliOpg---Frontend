@@ -1,4 +1,4 @@
-import { authUrl, tokenName, getErrorMessage } from "../app-config.js";
+import { authUrl, tokenName, getErrorMessage } from "../frontend/app-config.js";
 
 export default {
     template: ` 
