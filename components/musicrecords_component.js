@@ -1,4 +1,4 @@
-import {musicRecordsUrl, getStoredUserInfo, tokenName, getErrorMessage} from "../app-config.js";
+import {musicRecordsUrl, getStoredUserInfo, tokenName, getErrorMessage} from "../frontend/app-config.js";
 
 export default {
     template: `
