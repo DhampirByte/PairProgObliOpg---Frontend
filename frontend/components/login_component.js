@@ -39,6 +39,7 @@ export default {
                 console.log(response.data);
                 const userInfo = {
                     username: this.auth.username,
+                    role: response.data.role,
                     token: response.data.token
                 };
                 localStorage.setItem(tokenName, JSON.stringify(userInfo));
