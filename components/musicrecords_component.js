@@ -1,4 +1,4 @@
-import {musicRecordsUrl, getStoredUserInfo, tokenName, getErrorMessage} from "../frontend/app-config.js";
+import {musicRecordsUrl, getStoredUserInfo, tokenName, getErrorMessage} from "../app-config.js";
 
 export default {
     template: `
@@ -70,7 +70,7 @@ export default {
 
 
       <section v-if="userInfo.role == 'Admin'" class="update-record-section">
-      </h2>Update Music Record</h2>
+      <h2>Update Music Record</h2>
       <form @submit.prevent="UpdateAsync" id="update_record_form">
         <div class="mb-3">
           <label for="update_record_id" class="form-label">Record ID</label>
